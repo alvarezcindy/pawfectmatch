@@ -31,6 +31,7 @@ class BreedsSpider(scrapy.Spider):
             }
 
 
+# scraping characteristics and definitions from dog page
 class CharSpider(scrapy.Spider):
     name = "chars" #spider name
 
