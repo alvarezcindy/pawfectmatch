@@ -1,5 +1,6 @@
 """Models and database functions for DogMatch project"""
-from flask_sqlalchemy import flask_sqlalchemy
+
+from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
