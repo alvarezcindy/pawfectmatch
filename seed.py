@@ -17,19 +17,19 @@ def load_breeds():
 
         # Add new dog breed to session
         db.session.add(new_breed)
-        
+
     db.session.commit()
 
 
 # def load_ratings():
 #     """Load characteristic ratings from json file into database"""
 
-# def load_characteristics():
-#     """Load characteristics and descriptions from json file into database"""
+def load_characteristics():
+    """Load characteristics and descriptions from json file into database"""
 
 
 if __name__ == "__main__":
-    connect_to_db(app)
-    db.create_all()
+    # connect_to_db(app)
+    # db.create_all()
 
-    load_breeds()
+    load_characteristics()
