@@ -41,7 +41,7 @@ class Characteristic(db.Model):
 
     char_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     name = db.Column(db.String(100))
-    description = db.Column(db.String(1000))
+    description = db.Column(db.String(10000))
 
     def __repr__(self):
         """Provide helpful representation when printed."""

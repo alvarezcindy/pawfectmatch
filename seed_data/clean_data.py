@@ -8,6 +8,12 @@ def clean_chars():
 
     # Chars represents characteristics
 
+    # for chars in chars_dict:
+    #     for each_char in chars['char']:
+    #         if each_char[0] == ' '
+    #             del each_char
+    #     pprint(chars)
+
     for each in chars_dict:
         char_names = each['char']
 
