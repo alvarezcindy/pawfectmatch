@@ -1,26 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
+{% block content %}
 
-<head>
-  <title>DogMatch</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-</head>
+<div id="dog-list-block">
+    <h2>Dog breeds that match your preferences!</h2>
 
-<body>
-    <div id="dog-list-block">
-        <h2>Dog breeds that match your preferences!</h2>
+        <ul>
+        {% for dog in dogs %}
+            <li> {{ dog }}</a>
+            {% endfor %}
+        </ul>
 
-            <ul>
-            {% for dog in dogs %}
-                <li> {{ dog }}</a>
-                {% endfor %}
-            </ul>
-
-    </div>
-
-<script src="http://code.jquery.com/jquery.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
-</body>
-</html>
+</div>
+{% endblock %}

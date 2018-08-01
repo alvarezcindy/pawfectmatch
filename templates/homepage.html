@@ -1,81 +1,69 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
+{% block content %}
 
-<head>
-  <title>DogMatch</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-</head>
-
-<body>
-    <div id="homepage-block">
-        <h1>DogMatch</h1>
+<div id="homepage-block">
+    <h1>DogMatch</h1>
 
 <!-------------- DOG BREED TRAITS ---------------->
 
-        The first 3 traits are top priorities when looking for a dog.
-        The second 3 traits are low priority. 
+    The first 3 traits are top priorities when looking for a dog.
+    The second 3 traits are low priority. 
 
-        <form id="dog-traits-form" method="post" action="/dog-lists">
+    <form id="dog-traits-form" method="post" action="/dog-lists">
 
-            <label>Trait 1</label>
+        <label>Trait 1</label>
 
-            <select name="pos_trait1">
-                {% for trait in traits %}
-                <option value="{{ trait[0] }}">{{ trait[0] }}</option>
-                {% endfor %}
-            </select>
+        <select name="pos_trait1">
+            {% for trait in traits %}
+            <option value="{{ trait[0] }}">{{ trait[0] }}</option>
+            {% endfor %}
+        </select>
 
-            <label>Trait 2</label>
+        <label>Trait 2</label>
 
-            <select name="pos_trait2">
-                {% for trait in traits %}
-                <option value="{{ trait[0] }}">{{ trait[0] }}</option>
-                {% endfor %}
-            </select>
+        <select name="pos_trait2">
+            {% for trait in traits %}
+            <option value="{{ trait[0] }}">{{ trait[0] }}</option>
+            {% endfor %}
+        </select>
 
-            <label>Trait 3</label>
+        <label>Trait 3</label>
 
-            <select name="pos_trait3">
-                {% for trait in traits %}
-                <option value="{{ trait[0] }}">{{ trait[0] }}</option>
-                {% endfor %}
-            </select></br>
+        <select name="pos_trait3">
+            {% for trait in traits %}
+            <option value="{{ trait[0] }}">{{ trait[0] }}</option>
+            {% endfor %}
+        </select></br>
 
-            <label>Trait 1</label>
+        <label>Trait 1</label>
 
-            <select name="neg_trait1">
-                {% for trait in traits %}
-                <option value="{{ trait[0] }}">{{ trait[0] }}</option>
-                {% endfor %}
-            </select>
+        <select name="neg_trait1">
+            {% for trait in traits %}
+            <option value="{{ trait[0] }}">{{ trait[0] }}</option>
+            {% endfor %}
+        </select>
 
-            <label>Trait 2</label>
+        <label>Trait 2</label>
 
-            <select name="neg_trait2">
-                {% for trait in traits %}
-                <option value="{{ trait[0] }}">{{ trait[0] }}</option>
-                {% endfor %}
-            </select>
+        <select name="neg_trait2">
+            {% for trait in traits %}
+            <option value="{{ trait[0] }}">{{ trait[0] }}</option>
+            {% endfor %}
+        </select>
 
-            <label>Trait 3</label>
+        <label>Trait 3</label>
 
-            <select name="neg_trait3">
-                {% for trait in traits %}
-                <option value="{{ trait[0] }}">{{ trait[0] }}</option>
-                {% endfor %}
-            </select></br>
+        <select name="neg_trait3">
+            {% for trait in traits %}
+            <option value="{{ trait[0] }}">{{ trait[0] }}</option>
+            {% endfor %}
+        </select></br>
 
-            <input type="submit">
+        <input type="submit">
 
-        </form>
+    </form>
 
 <!--         <script src="/static/js/breeds.js"></script> -->
 
-    </div>
-
-<script src="http://code.jquery.com/jquery.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
-</body>
-</html>
+</div>
+{% endblock %}
