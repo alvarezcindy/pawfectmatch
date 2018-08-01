@@ -18,6 +18,7 @@ app.secret_key = "SEEECREEEET"
 app.jinja_env.undefined = StrictUndefined
 
 PETFINDER_KEY = os.environ.get('PETFINDER_KEY')
+PETFINDER_URL = 'http://api.petfinder.com/'
 
 @app.route('/')
 def index():
@@ -36,14 +37,36 @@ def dog_traits():
     neg_trait3 = request.form.get("neg_trait3")
 
     pos_traits = (pos_trait1, pos_trait2, pos_trait3)
-    neg_traits = (neg_trait1, neg_trait2, neg_trait3)
 
+    dogs = (db.session.query(Breed.name)
+                      .join(Rating)
+                      .join(Characteristic)
+                      .filter(((Characteristic.name==pos_trait1) |
+                               (Characteristic.name==pos_trait2) |
+                               (Characteristic.name==pos_trait3)) &
+                              ((Rating.score==5) |
+                               (Rating.score==4)))
+                      .group_by(Breed.name))
 
+    # #SQL!
+    # SELECT breeds.name
+    # FROM breeds 
+    # JOIN ratings ON breeds.breed_id = ratings.breed_id
+    # JOIN characteristics ON ratings.char_id = characteristics.char_id
+    # WHERE
+    # ((characteristics.name='Affectionate With Family' 
+    # OR characteristics.name='Easy To Train')
+    # AND (ratings.score=5 OR ratings.score=4))
+    # OR
+    # ((characteristics.name='Amount Of Shedding' 
+    # OR characteristics.name='Tendency to Bark or Howl')
+    # AND (ratings.score=1 OR ratings.score=2))
+    # GROUP BY breeds.name
+    # LIMIT 30;
 
-
-
-
-    return render_template("dog_list.html", dogs=dogs)
+    return render_template("dog_list.html", 
+                           traits=pos_traits,
+                           dogs=dogs[0:20])
 
 if __name__ == "__main__":
 

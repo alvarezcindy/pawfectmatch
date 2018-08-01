@@ -3,10 +3,12 @@
 
 <div id="dog-list-block">
     <h2>Dog breeds that match your preferences!</h2>
+    You said the following traits were most important to you:</br>
+    {{traits[0]}}, {{traits[1]}}, {{traits[2]}}</br></br>
 
         <ul>
         {% for dog in dogs %}
-            <li> {{ dog }}</a>
+            <li> {{ dog[0] }}</a>
             {% endfor %}
         </ul>
 

@@ -29,6 +29,8 @@ class Rating(db.Model):
     char_id = db.Column(db. Integer, db.ForeignKey('characteristics.char_id'))
     score = db.Column(db.Integer)
 
+    breeds = db.relationship('Breed', backref='ratings')
+
     def __repr__(self):
         """Provide helpful representation when printed."""
 
@@ -42,6 +44,8 @@ class Characteristic(db.Model):
     char_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     name = db.Column(db.String(100))
     description = db.Column(db.String(10000))
+
+    ratings = db.relationship('Rating', backref='characteristics')
 
     def __repr__(self):
         """Provide helpful representation when printed."""
