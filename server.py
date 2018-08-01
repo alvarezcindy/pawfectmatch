@@ -7,6 +7,8 @@ from flask_debugtoolbar import DebugToolbarExtension
 
 from model import connect_to_db, db, Breed, Rating, Characteristic
 
+import os
+
 #initialize Flask app
 app = Flask(__name__)
 
@@ -15,6 +17,7 @@ app.secret_key = "SEEECREEEET"
 #Raise an error if there's an undefined variable in Jinja
 app.jinja_env.undefined = StrictUndefined
 
+PETFINDER_KEY = os.environ.get('PETFINDER_KEY')
 
 @app.route('/')
 def index():
@@ -23,7 +26,7 @@ def index():
     traits = db.session.query(Characteristic.name).all()
     return render_template("homepage.html", traits=traits)
 
-@app.route('/dog-breeds', methods=['POST'])
+@app.route('/dog-list', methods=['POST'])
 def dog_traits():
     pos_trait1 = request.form.get("pos_trait1")
     pos_trait2 = request.form.get("pos_trait2")
@@ -35,9 +38,12 @@ def dog_traits():
     pos_traits = (pos_trait1, pos_trait2, pos_trait3)
     neg_traits = (neg_trait1, neg_trait2, neg_trait3)
 
-    return render_template("dogs_list.html",
-                            pos_traits=pos_traits, 
-                            neg_traits=neg_traits)
+
+
+
+
+
+    return render_template("dog_list.html", dogs=dogs)
 
 if __name__ == "__main__":
 
