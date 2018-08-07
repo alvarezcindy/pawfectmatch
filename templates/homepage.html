@@ -9,11 +9,11 @@
     The first 3 traits are top priorities when looking for a dog.
     The second 3 traits are low priority. 
 
-    <form id="dog-traits-form" method="post" action="/dog-list">
+    <form id="dog-traits-form" method="post" action="/dog-list.json">
 
         <label>Trait 1</label>
 
-        <select name="pos_trait1">
+        <select name="pos_trait1" id="pos_trait1">
             {% for trait in traits %}
             <option value="{{ trait[0] }}">{{ trait[0] }}</option>
             {% endfor %}
@@ -21,7 +21,7 @@
 
         <label>Trait 2</label>
 
-        <select name="pos_trait2">
+        <select name="pos_trait2" id="pos_trait2">
             {% for trait in traits %}
             <option value="{{ trait[0] }}">{{ trait[0] }}</option>
             {% endfor %}
@@ -29,41 +29,41 @@
 
         <label>Trait 3</label>
 
-        <select name="pos_trait3">
-            {% for trait in traits %}
-            <option value="{{ trait[0] }}">{{ trait[0] }}</option>
-            {% endfor %}
-        </select></br>
-
-        <label>Trait 1</label>
-
-        <select name="neg_trait1">
-            {% for trait in traits %}
-            <option value="{{ trait[0] }}">{{ trait[0] }}</option>
-            {% endfor %}
-        </select>
-
-        <label>Trait 2</label>
-
-        <select name="neg_trait2">
-            {% for trait in traits %}
-            <option value="{{ trait[0] }}">{{ trait[0] }}</option>
-            {% endfor %}
-        </select>
-
-        <label>Trait 3</label>
-
-        <select name="neg_trait3">
+        <select name="pos_trait3" id="pos_trait3">
             {% for trait in traits %}
             <option value="{{ trait[0] }}">{{ trait[0] }}</option>
             {% endfor %}
         </select></br>
 
         <input type="submit">
-
     </form>
 
-<!--         <script src="/static/js/breeds.js"></script> -->
+    <div id="form-results"> :( </div>
+
+    <script type="text/javascript">
+        function getDogBreeds(results) {
+            console.log(results)
+            // let status = results;
+            $('#form-results').html(results);
+        }
+
+        function getDogTraits(evt) {
+            evt.preventDefault();
+
+            var formInputs = {
+                "pos_trait1": $("#pos_trait1").val(),
+                "pos_trait2": $("#pos_trait2").val(),
+                "pos_trait3": $("#pos_trait3").val(),
+            };
+
+            $.post("/dog-list.json",
+                   formInputs,
+                   getDogBreeds);
+        }
+
+        $("#dog-traits-form").on("submit", getDogTraits);
+
+    </script>
 
 </div>
 {% endblock %}
