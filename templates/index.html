@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>DogMatch</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+<div>
+    <h1>Dogs!!</h1>
+
+<!-------------- DOG BREED TRAITS ---------------->
+
+    <form id="dog-traits-form" method="post" action="/dog-list.json">
+        The first 3 traits are top priorities when looking for a dog. 
+
+        <label>Trait 1</label>
+
+        <select name="pos_trait1" id="pos_trait1">
+            {% for trait in traits %}
+            <option value="{{ trait[0] }}">{{ trait[0] }}</option>
+            {% endfor %}
+        </select>
+
+        <label>Trait 2</label>
+
+        <select name="pos_trait2" id="pos_trait2">
+            {% for trait in traits %}
+            <option value="{{ trait[0] }}">{{ trait[0] }}</option>
+            {% endfor %}
+        </select>
+
+        <label>Trait 3</label>
+
+        <select name="pos_trait3" id="pos_trait3">
+            {% for trait in traits %}
+            <option value="{{ trait[0] }}">{{ trait[0] }}</option>
+            {% endfor %}
+        </select></br>
+
+        <input type="submit">
+    </form>
+</div>
+
+<div id="dog-matches"> </div>
+
+<div class="dogs-container">
+    <div class="row">
+        {% for i in range(12) %}
+        <div class="col-3">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="{{photos[i]}}/100px180" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{names[i]}}</h5>
+                    <p class="card-text">Description here.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script src="http://code.jquery.com/jquery.js"></script>
+<script src="../static/js/breeds.js"></script>
+
+</body>
+</html>

@@ -26,16 +26,37 @@ def index():
     """Homepage."""
 
     traits = db.session.query(Characteristic.name).all()
-    return render_template("homepage.html", traits=traits)
+
+    payload = {'key': PETFINDER_KEY,
+               'animal': 'dog',
+               'breed': 'Rottweiler',
+               'location': '94702',
+               'count': 12,
+               'format': 'json'
+               }
+
+    data = requests.get(PETFINDER_URL + 'pet.find', params=payload)
+    data = data.json()
+
+    results = data['petfinder']['pets']['pet']
+
+    names = []
+    photos = []
+
+    for result in results: 
+        names.append(result['name']['$t'])
+        photos.append(result['media']['photos']['photo'][2]['$t'])
+
+    return render_template("index.html", 
+                           traits=traits,
+                           names=names,
+                           photos=photos)
 
 @app.route('/dog-list.json', methods=['POST'])
 def dog_traits():
     pos_trait1 = request.form.get("pos_trait1")
     pos_trait2 = request.form.get("pos_trait2")
     pos_trait3 = request.form.get("pos_trait3")
-    # neg_trait1 = request.form.get("neg_trait1")
-    # neg_trait2 = request.form.get("neg_trait2")
-    # neg_trait3 = request.form.get("neg_trait3")
 
     pos_traits = (pos_trait1, pos_trait2, pos_trait3)
 
@@ -49,53 +70,9 @@ def dog_traits():
                                (Rating.score==4)))
                       .group_by(Breed.name))
 
-    payload = {'key': PETFINDER_KEY,
-               'animal': 'dog',
-               'breed': 'Chihuahua',
-               'location': '94702',
-               'count': 1,
-               'format': 'json'
-               }
+    dogs = dogs[0:10]
 
-    data = requests.get(PETFINDER_URL + 'pet.find', params=payload)
-    data = data.json()
-
-    photos = data['petfinder']['pets']['pet']['media']['photos']['photo']
-
-    # for photo in photos:
-    #     if photo['@size'] != 'x':
-    #       del photo
-
-    #     {% for photo in photos %}
-    #     {% if photo['@size'] == 'x' %}
-    #         {{ photo['$t'] }}
-    #     {% endif %}
-    # {% endfor %}
-
-    # results = data['pets']
-
-    # #SQL!
-    # SELECT breeds.name
-    # FROM breeds 
-    # JOIN ratings ON breeds.breed_id = ratings.breed_id
-    # JOIN characteristics ON ratings.char_id = characteristics.char_id
-    # WHERE
-    # ((characteristics.name='Affectionate With Family' 
-    # OR characteristics.name='Easy To Train')
-    # AND (ratings.score=5 OR ratings.score=4))
-    # OR
-    # ((characteristics.name='Amount Of Shedding' 
-    # OR characteristics.name='Tendency to Bark or Howl')
-    # AND (ratings.score=1 OR ratings.score=2))
-    # GROUP BY breeds.name
-    # LIMIT 30;
-
-    results = {'traits': pos_traits,
-               'dogs': dogs[0:20],
-               'photos': photos}
-
-    return render_template('dog_list.html', traits=pos_traits, photos=photos, dogs=dogs[0:20])
-    # return jsonify(results)
+    return jsonify(pos_traits, dogs)
 
 if __name__ == "__main__":
 
