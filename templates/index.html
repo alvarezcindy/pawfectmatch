@@ -9,8 +9,15 @@
 </head>
 
 <body>
+<nav class="navbar navbar-dark bg-dark justify-content-between">
+  <a class="navbar-brand">Navbar</a>
+  <form class="form-inline">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+  </form>
+</nav>
 
-<div>
+<div class='dog-quiz'>
     <h1>Dogs!!</h1>
 
 <!-------------- DOG BREED TRAITS ---------------->
@@ -46,7 +53,10 @@
     </form>
 </div>
 
-<div id="dog-matches"> 
+<div class="matches-container"> 
+    <div id="dog-matches">
+    </div>
+    <button id="retake-quiz" hidden="true"> Retake Quiz! </button>
 </div>
 
 <div class="dogs-container">

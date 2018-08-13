@@ -17,9 +17,11 @@ function getDogBreeds(results) {
     let response = ('<h3>You said the following traits were most important to you:</h3>' +
                     str_traits +
                     '<h2>Dog breeds that match your preferences!</h2>' +
-                    str_dogs
+                    str_dogs 
                     );
 
+    $(".dog-quiz").toggle();
+    $("#retake-quiz").attr("hidden", false);
     $("#dog-matches").html(response);
 }
 
@@ -38,3 +40,18 @@ function getDogTraits(evt) {
 }
 
 $("#dog-traits-form").on("submit", getDogTraits);
+
+function toggleQuiz(evt) {
+    evt.preventDefault();
+
+    $("#dog-matches").html('');
+    $(".dog-quiz").toggle();
+    $("#retake-quiz").attr("hidden", true);
+}
+
+$("#retake-quiz").on("click", toggleQuiz);
+
+
+
+
+
