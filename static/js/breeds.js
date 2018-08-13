@@ -32,6 +32,8 @@ function getDogTraits(evt) {
         "pos_trait1": $("#pos_trait1").val(),
         "pos_trait2": $("#pos_trait2").val(),
         "pos_trait3": $("#pos_trait3").val(),
+        "pos_trait4": $("#pos_trait4").val(),
+        "pos_trait5": $("#pos_trait5").val(),
     };
 
     $.post('/dog-list.json',

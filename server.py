@@ -4,6 +4,7 @@ import os
 import requests
 
 from jinja2 import StrictUndefined
+from sqlalchemy import func, desc
 from flask import Flask, render_template, request, flash, redirect, session, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
 from pprint import pprint, pformat
@@ -65,34 +66,38 @@ def dog_traits():
     pos_trait1 = request.form.get("pos_trait1")
     pos_trait2 = request.form.get("pos_trait2")
     pos_trait3 = request.form.get("pos_trait3")
+    pos_trait4 = request.form.get("pos_trait4")
+    pos_trait5 = request.form.get("pos_trait5")
 
-    pos_traits = (pos_trait1, pos_trait2, pos_trait3)
+    pos_traits = (pos_trait1, pos_trait2, pos_trait3, pos_trait4, pos_trait5)
 
-    dogs = (db.session.query(Breed.name)
+    dogs = (db.session.query(Breed.name, func.count(Breed.breed_id))
                       .join(Rating)
                       .join(Characteristic)
                       .filter(((Characteristic.name==pos_trait1) |
                                (Characteristic.name==pos_trait2) |
-                               (Characteristic.name==pos_trait3)) &
+                               (Characteristic.name==pos_trait3) |
+                               (Characteristic.name==pos_trait4) |
+                               (Characteristic.name==pos_trait5)) &
                               ((Rating.score==5) |
                                (Rating.score==4)))
-                      .group_by(Breed.name))
+                      .group_by(Breed.name)
+                      .order_by(desc(func.count(Breed.breed_id))))
 
-#SQL!
-# SELECT breeds.name, COUNT(*) AS nums
-# FROM breeds 
-# JOIN ratings ON breeds.breed_id = ratings.breed_id
-# JOIN characteristics ON ratings.char_id = characteristics.char_id
-# WHERE
-# ((characteristics.name='Affectionate With Family' 
-# OR characteristics.name='Easy To Train'
-# OR characteristics.name='Adapts Well to Apartment Living')
-# AND (ratings.score=5 OR ratings.score=4))
-# GROUP BY breeds.name
-# HAVING COUNT(*) > 1
-# ORDER BY nums DESC;
-# LIMIT 30;
 
+    # dogs = (db.session.query(Breed.name, func.count(Breed.breed_id))
+    #                   .join(Rating)
+    #                   .join(Characteristic)
+    #                   .filter(((Characteristic.name=="Easy To Train") |
+    #                            (Characteristic.name=="Dog Friendly") |
+    #                            (Characteristic.name=="Intelligence") |
+    #                            (Characteristic.name=="Easy To Groom") |
+    #                            (Characteristic.name=="Affectionate with Family") |
+    #                            (Characteristic.name=="Size")) &
+    #                           ((Rating.score==5) |
+    #                            (Rating.score==4)))
+    #                   .group_by(Breed.name)
+    #                   .order_by(desc(func.count(Breed.breed_id))))
 
     dogs = dogs[0:10]
 

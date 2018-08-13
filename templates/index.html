@@ -49,6 +49,22 @@
             {% endfor %}
         </select></br>
 
+        <label>Trait 4</label>
+
+        <select name="pos_trait4" id="pos_trait4">
+            {% for trait in traits %}
+            <option value="{{ trait[0] }}">{{ trait[0] }}</option>
+            {% endfor %}
+        </select>
+
+        <label>Trait 5</label>
+
+        <select name="pos_trait5" id="pos_trait5">
+            {% for trait in traits %}
+            <option value="{{ trait[0] }}">{{ trait[0] }}</option>
+            {% endfor %}
+        </select>
+
         <input type="submit">
     </form>
 </div>
@@ -58,6 +74,7 @@
     </div>
     <button id="retake-quiz" hidden="true"> Retake Quiz! </button>
 </div>
+</br>
 
 <div class="dogs-container">
     <div class="row">
