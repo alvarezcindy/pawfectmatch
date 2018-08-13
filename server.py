@@ -29,7 +29,7 @@ def index():
 
     payload = {'key': PETFINDER_KEY,
                'animal': 'dog',
-               'breed': 'Rottweiler',
+               # 'breed': 'Rottweiler',
                'location': '94702',
                'count': 12,
                'format': 'json'
@@ -42,15 +42,23 @@ def index():
 
     names = []
     photos = []
+    desc = []
 
     for result in results: 
         names.append(result['name']['$t'])
-        photos.append(result['media']['photos']['photo'][2]['$t'])
+
+        try:
+            photos.append(result['media']['photos']['photo'][2]['$t'])
+            desc.append(result['description']['$t'][:70])
+        except: 
+            photos.append('static/img_placeholder.jpg')
+            desc.append('No Description')
 
     return render_template("index.html", 
                            traits=traits,
                            names=names,
-                           photos=photos)
+                           photos=photos,
+                           desc=desc)
 
 @app.route('/dog-list.json', methods=['POST'])
 def dog_traits():
@@ -69,6 +77,22 @@ def dog_traits():
                               ((Rating.score==5) |
                                (Rating.score==4)))
                       .group_by(Breed.name))
+
+#SQL!
+# SELECT breeds.name, COUNT(*) AS nums
+# FROM breeds 
+# JOIN ratings ON breeds.breed_id = ratings.breed_id
+# JOIN characteristics ON ratings.char_id = characteristics.char_id
+# WHERE
+# ((characteristics.name='Affectionate With Family' 
+# OR characteristics.name='Easy To Train'
+# OR characteristics.name='Adapts Well to Apartment Living')
+# AND (ratings.score=5 OR ratings.score=4))
+# GROUP BY breeds.name
+# HAVING COUNT(*) > 1
+# ORDER BY nums DESC;
+# LIMIT 30;
+
 
     dogs = dogs[0:10]
 

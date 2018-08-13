@@ -21,7 +21,6 @@ function getDogBreeds(results) {
                     );
 
     $("#dog-matches").html(response);
-    $("#dog-traits-form").html('Take Quiz Again!');
 }
 
 function getDogTraits(evt) {

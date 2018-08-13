@@ -46,18 +46,19 @@
     </form>
 </div>
 
-<div id="dog-matches"> </div>
+<div id="dog-matches"> 
+</div>
 
 <div class="dogs-container">
     <div class="row">
         {% for i in range(12) %}
         <div class="col-3">
             <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="{{photos[i]}}/100px180" alt="Card image cap">
+                <img class="card-img-top" src="{{photos[i]}}" alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-title">{{names[i]}}</h5>
-                    <p class="card-text">Description here.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <p class="card-text">{{desc[i]}}</p>
+                    <a href="#" class="btn btn-primary">Read More!</a>
                 </div>
             </div>
         </div>
