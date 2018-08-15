@@ -6,91 +6,112 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="static/styles.css">
 </head>
 
 <body>
 <nav class="navbar navbar-dark bg-dark justify-content-between">
-  <a class="navbar-brand">Navbar</a>
+  <a class="navbar-brand" style="color:white">Navbar</a>
   <form class="form-inline">
     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
   </form>
 </nav>
 
-<div class='dog-quiz'>
-    <h1>Dogs!!</h1>
+<div class="container-fluid" style="height:500px">
+    <div class ="row">
+        <div class="dog-quiz">
+            <h1>Dogs!!</h1>
 
-<!-------------- DOG BREED TRAITS ---------------->
+        <!-------------- DOG BREED TRAITS ---------------->
 
-    <form id="dog-traits-form" method="post" action="/dog-list.json">
-        The first 3 traits are top priorities when looking for a dog. 
+            <form id="dog-traits-form" method="post" action="/dog-list.json">
+                The first 3 traits are top priorities when looking for a dog. 
 
-        <label>Trait 1</label>
+                <label>Trait 1</label>
 
-        <select name="pos_trait1" id="pos_trait1">
-            {% for trait in traits %}
-            <option value="{{ trait[0] }}">{{ trait[0] }}</option>
-            {% endfor %}
-        </select>
+                <select name="pos_trait1" id="pos_trait1">
+                    {% for trait in traits %}
+                    <option value="{{ trait[0] }}">{{ trait[0] }}</option>
+                    {% endfor %}
+                </select>
 
-        <label>Trait 2</label>
+                <label>Trait 2</label>
 
-        <select name="pos_trait2" id="pos_trait2">
-            {% for trait in traits %}
-            <option value="{{ trait[0] }}">{{ trait[0] }}</option>
-            {% endfor %}
-        </select>
+                <select name="pos_trait2" id="pos_trait2">
+                    {% for trait in traits %}
+                    <option value="{{ trait[0] }}">{{ trait[0] }}</option>
+                    {% endfor %}
+                </select>
 
-        <label>Trait 3</label>
+                <label>Trait 3</label>
 
-        <select name="pos_trait3" id="pos_trait3">
-            {% for trait in traits %}
-            <option value="{{ trait[0] }}">{{ trait[0] }}</option>
-            {% endfor %}
-        </select></br>
+                <select name="pos_trait3" id="pos_trait3">
+                    {% for trait in traits %}
+                    <option value="{{ trait[0] }}">{{ trait[0] }}</option>
+                    {% endfor %}
+                </select></br>
 
-        <label>Trait 4</label>
+                <label>Trait 4</label>
 
-        <select name="pos_trait4" id="pos_trait4">
-            {% for trait in traits %}
-            <option value="{{ trait[0] }}">{{ trait[0] }}</option>
-            {% endfor %}
-        </select>
+                <select name="pos_trait4" id="pos_trait4">
+                    {% for trait in traits %}
+                    <option value="{{ trait[0] }}">{{ trait[0] }}</option>
+                    {% endfor %}
+                </select>
 
-        <label>Trait 5</label>
+                <label>Trait 5</label>
 
-        <select name="pos_trait5" id="pos_trait5">
-            {% for trait in traits %}
-            <option value="{{ trait[0] }}">{{ trait[0] }}</option>
-            {% endfor %}
-        </select>
+                <select name="pos_trait5" id="pos_trait5">
+                    {% for trait in traits %}
+                    <option value="{{ trait[0] }}">{{ trait[0] }}</option>
+                    {% endfor %}
+                </select>
 
-        <input type="submit">
-    </form>
-</div>
+                <input type="submit">
+            </form>
+        </div>
 
-<div class="matches-container"> 
-    <div id="dog-matches">
+        <div class="matches-container"> 
+            <div id="dog-matches">
+            </div>
+            <button id="retake-quiz" hidden="true"> Retake Quiz! </button>
+        </div>
     </div>
-    <button id="retake-quiz" hidden="true"> Retake Quiz! </button>
 </div>
-</br>
 
-<div class="dogs-container">
+<div class="container-fluid">
     <div class="row">
-        {% for i in range(12) %}
+        {% for i in range(1, 5) %}
+        <div class="col-3"><button>FILTER {{i}}</button></div>
+        {% endfor %}
+    </div>
+
+    <div class="row">
+        {% for dog in dogs %}
         <div class="col-3">
             <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="{{photos[i]}}" alt="Card image cap">
+                <img class="card-img-top" src="{{dog['photos']}}" alt="Card image cap">
                 <div class="card-body">
-                    <h5 class="card-title">{{names[i]}}</h5>
-                    <p class="card-text">{{desc[i]}}</p>
+                    <h5 class="card-title">{{dog['name']}}</h5>
+                    <p class="card-text">{{dog['desc']}}</p>
                     <a href="#" class="btn btn-primary">Read More!</a>
                 </div>
             </div>
         </div>
         {% endfor %}
     </div>
+
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+  </ul>
+</nav>
+
 </div>
 
 <script src="http://code.jquery.com/jquery.js"></script>

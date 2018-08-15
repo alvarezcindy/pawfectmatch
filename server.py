@@ -8,6 +8,7 @@ from sqlalchemy import func, desc
 from flask import Flask, render_template, request, flash, redirect, session, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
 from pprint import pprint, pformat
+from random import shuffle
 
 from model import connect_to_db, db, Breed, Rating, Characteristic
 
@@ -28,38 +29,45 @@ def index():
 
     traits = db.session.query(Characteristic.name).all()
 
-    payload = {'key': PETFINDER_KEY,
-               'animal': 'dog',
-               # 'breed': 'Rottweiler',
-               'location': '94702',
-               'count': 12,
-               'format': 'json'
-               }
-
-    data = requests.get(PETFINDER_URL + 'pet.find', params=payload)
-    data = data.json()
-
-    results = data['petfinder']['pets']['pet']
-
-    names = []
-    photos = []
-    desc = []
-
-    for result in results: 
-        names.append(result['name']['$t'])
-
-        try:
-            photos.append(result['media']['photos']['photo'][2]['$t'])
-            desc.append(result['description']['$t'][:70])
-        except: 
-            photos.append('static/img_placeholder.jpg')
-            desc.append('No Description')
+    dogs = call_api()
 
     return render_template("index.html", 
                            traits=traits,
-                           names=names,
-                           photos=photos,
-                           desc=desc)
+                           dogs=dogs)
+                           # names=names,
+
+def call_api(breeds=['Chihuahua', 'Rottweiler']):
+
+    dogs = []
+
+    for breed in breeds:
+        payload = {'key': PETFINDER_KEY,
+                    'animal': 'dog',
+                    'breed': breed,
+                    'location': '94702',
+                    'offset': 8,
+                    'count': 8,
+                    'format': 'json'
+                    }
+
+        data = requests.get(PETFINDER_URL + 'pet.find', params=payload)
+        data = data.json()
+
+        results = data['petfinder']['pets']['pet']
+
+        for result in results: 
+            try:
+                dogs.append({'name': result['name']['$t'],
+                             'photos': result['media']['photos']['photo'][2]['$t'],
+                             'desc': result['description']['$t'][:70]})
+            except: 
+                dogs.append({'name': result['name']['$t'],
+                             'photos': 'static/img_placeholder.jpg',
+                             'desc': 'static/img_placeholder.jpg'})
+
+    shuffle(dogs)
+    return dogs
+
 
 @app.route('/dog-list.json', methods=['POST'])
 def dog_traits():
@@ -83,21 +91,6 @@ def dog_traits():
                                (Rating.score==4)))
                       .group_by(Breed.name)
                       .order_by(desc(func.count(Breed.breed_id))))
-
-
-    # dogs = (db.session.query(Breed.name, func.count(Breed.breed_id))
-    #                   .join(Rating)
-    #                   .join(Characteristic)
-    #                   .filter(((Characteristic.name=="Easy To Train") |
-    #                            (Characteristic.name=="Dog Friendly") |
-    #                            (Characteristic.name=="Intelligence") |
-    #                            (Characteristic.name=="Easy To Groom") |
-    #                            (Characteristic.name=="Affectionate with Family") |
-    #                            (Characteristic.name=="Size")) &
-    #                           ((Rating.score==5) |
-    #                            (Rating.score==4)))
-    #                   .group_by(Breed.name)
-    #                   .order_by(desc(func.count(Breed.breed_id))))
 
     dogs = dogs[0:10]
 
