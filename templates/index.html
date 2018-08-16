@@ -11,7 +11,7 @@
 
 <body>
 <nav class="navbar navbar-dark bg-dark justify-content-between">
-  <a class="navbar-brand" style="color:white">Navbar</a>
+  <a class="navbar-brand" style="color:white">DOGS!!!!</a>
   <form class="form-inline">
     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
@@ -23,52 +23,57 @@
         <div class="dog-quiz">
             <h1>Dogs!!</h1>
 
-        <!-------------- DOG BREED TRAITS ---------------->
-
-            <form id="dog-traits-form" method="post" action="/dog-list.json">
-                The first 3 traits are top priorities when looking for a dog. 
-
-                <label>Trait 1</label>
-
-                <select name="pos_trait1" id="pos_trait1">
+            <form id="traits-form" method="post" action="/dog-list.json">
+                <fieldset>
+                    <h2 class="fs-title">Q Category 1 Here</h2>
+                    <h3 class="fs-subtitle">Dog trait question?</h3>
+                    <select name="pos_trait1" id="pos_trait1">
                     {% for trait in traits %}
-                    <option value="{{ trait[0] }}">{{ trait[0] }}</option>
+                        <option value="{{ trait[0] }}">{{ trait[0] }}</option>
                     {% endfor %}
-                </select>
-
-                <label>Trait 2</label>
-
-                <select name="pos_trait2" id="pos_trait2">
+                    </select>
+                    <input type="button" name="next" class="next action-button" value="Next"/>
+                </fieldset>
+                <fieldset>
+                    <h2 class="fs-title">Q Category 2 Here</h2>
+                    <h3 class="fs-subtitle">Dog trait question?</h3>
+                    <select name="pos_trait2" id="pos_trait2">
                     {% for trait in traits %}
-                    <option value="{{ trait[0] }}">{{ trait[0] }}</option>
+                        <option value="{{ trait[0] }}">{{ trait[0] }}</option>
                     {% endfor %}
-                </select>
-
-                <label>Trait 3</label>
-
-                <select name="pos_trait3" id="pos_trait3">
+                    </select>
+                    <input type="button" name="next" class="next action-button" value="Next"/>
+                </fieldset>
+                <fieldset>
+                    <h2 class="fs-title">Q Category 3 Here</h2>
+                    <h3 class="fs-subtitle">Dog trait question?</h3>
+                    <select name="pos_trait3" id="pos_trait3">
                     {% for trait in traits %}
-                    <option value="{{ trait[0] }}">{{ trait[0] }}</option>
+                        <option value="{{ trait[0] }}">{{ trait[0] }}</option>
                     {% endfor %}
-                </select></br>
-
-                <label>Trait 4</label>
-
-                <select name="pos_trait4" id="pos_trait4">
+                    </select>
+                    <input type="button" name="next" class="next action-button" value="Next"/>
+                </fieldset>
+                <fieldset>
+                    <h2 class="fs-title">Q Category 4 Here</h2>
+                    <h3 class="fs-subtitle">Dog trait question?</h3>
+                    <select name="pos_trait4" id="pos_trait4">
                     {% for trait in traits %}
-                    <option value="{{ trait[0] }}">{{ trait[0] }}</option>
+                        <option value="{{ trait[0] }}">{{ trait[0] }}</option>
                     {% endfor %}
-                </select>
-
-                <label>Trait 5</label>
-
-                <select name="pos_trait5" id="pos_trait5">
+                    </select>
+                    <input type="button" name="next" class="next action-button" value="Next"/>
+                </fieldset>
+                <fieldset>
+                    <h2 class="fs-title">Q Category 5 Here</h2>
+                    <h3 class="fs-subtitle">Dog trait question?</h3>
+                    <select name="pos_trait5" id="pos_trait5">
                     {% for trait in traits %}
-                    <option value="{{ trait[0] }}">{{ trait[0] }}</option>
+                        <option value="{{ trait[0] }}">{{ trait[0] }}</option>
                     {% endfor %}
-                </select>
-
-                <input type="submit">
+                    </select>
+                    <input type="submit" name="submit" class="submit action-button" value="Submit"/>
+                </fieldset>
             </form>
         </div>
 
@@ -81,13 +86,13 @@
 </div>
 
 <div class="container-fluid">
-    <div class="row">
+<!--     <div class="row">
         {% for i in range(1, 5) %}
         <div class="col-3"><button>FILTER {{i}}</button></div>
         {% endfor %}
-    </div>
+    </div> -->
 
-    <div class="row">
+    <div class="row" id="dog-cards">
         {% for dog in dogs %}
         <div class="col-3">
             <div class="card" style="width: 18rem;">
@@ -101,20 +106,11 @@
         </div>
         {% endfor %}
     </div>
-
-<nav aria-label="Page navigation example">
-  <ul class="pagination">
-    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-  </ul>
-</nav>
-
 </div>
 
 <script src="http://code.jquery.com/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+<script src="../static/js/quiz.js"></script>
 <script src="../static/js/breeds.js"></script>
 
 </body>

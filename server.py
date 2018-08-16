@@ -36,7 +36,13 @@ def index():
                            dogs=dogs)
                            # names=names,
 
-def call_api(breeds=['Chihuahua', 'Rottweiler']):
+@app.route('/call-api.json')
+def call_api():
+
+    breeds = request.args.getlist("search_dogs[]")
+
+    if not breeds:
+        breeds = [None]
 
     dogs = []
 
@@ -45,29 +51,32 @@ def call_api(breeds=['Chihuahua', 'Rottweiler']):
                     'animal': 'dog',
                     'breed': breed,
                     'location': '94702',
-                    'offset': 8,
-                    'count': 8,
+                    # 'offset': 16,
+                    'count': 10,
                     'format': 'json'
                     }
 
         data = requests.get(PETFINDER_URL + 'pet.find', params=payload)
         data = data.json()
 
-        results = data['petfinder']['pets']['pet']
+        if data['petfinder']['pets'] != {}:
 
-        for result in results: 
-            try:
-                dogs.append({'name': result['name']['$t'],
-                             'photos': result['media']['photos']['photo'][2]['$t'],
-                             'desc': result['description']['$t'][:70]})
-            except: 
-                dogs.append({'name': result['name']['$t'],
-                             'photos': 'static/img_placeholder.jpg',
-                             'desc': 'static/img_placeholder.jpg'})
+            results = data['petfinder']['pets']['pet']
+
+            for result in results: 
+                try:
+                    dogs.append({'name': result['name']['$t'],
+                                 'photos': result['media']['photos']['photo'][2]['$t'],
+                                 'desc': result['description']['$t'][:70]})
+                except: 
+                  continue
 
     shuffle(dogs)
-    return dogs
 
+    if request.args.getlist("search_dogs[]"):
+        return jsonify(dogs)
+
+    return dogs
 
 @app.route('/dog-list.json', methods=['POST'])
 def dog_traits():
