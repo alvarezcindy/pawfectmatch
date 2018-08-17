@@ -13,11 +13,12 @@ class Breed(db.Model):
 
     breed_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     name = db.Column(db.String(100))
+    description = db.Column(db.String(100000))
 
     def __repr__(self):
         """Provide helpful representation when printed."""
 
-        return f"<Breed breed_id={self.breed_id} name={self.name}>"
+        return f"<Breed breed_id={self.breed_id} name={self.name} description={self.description}>"
 
     
 class Rating(db.Model):

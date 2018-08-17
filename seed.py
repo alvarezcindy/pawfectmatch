@@ -13,7 +13,14 @@ def load_breeds():
 
     for dog in breeds_dict:
         name = dog['breed']
-        new_breed = Breed(name=name)
+        desc = dog['info']
+        clean_desc = ''
+
+        for each in desc[0:25]:
+            clean_desc += each
+
+        new_breed = Breed(name=name,
+                          description=clean_desc)
 
         # Add new dog breed to session
         db.session.add(new_breed)

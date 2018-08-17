@@ -2,6 +2,18 @@
     padding-left: 50px;
 }
 
+.trait-tooltips button {
+    display: none;
+}
+
+.top-ten button {
+    display:none;
+}
+
+.matches-container {
+    display:none;
+}
+
 /*custom font*/
 @import url(https://fonts.googleapis.com/css?family=Montserrat);
 

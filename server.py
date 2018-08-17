@@ -27,14 +27,15 @@ PETFINDER_URL = 'http://api.petfinder.com/'
 def index():
     """Homepage."""
 
-    traits = db.session.query(Characteristic.name).all()
+    traits = db.session.query(Characteristic.name, Characteristic.description).all()
+    breeds = db.session.query(Breed.name, Breed.description).all()
 
     dogs = call_api()
 
     return render_template("index.html", 
                            traits=traits,
+                           breeds=breeds,
                            dogs=dogs)
-                           # names=names,
 
 @app.route('/call-api.json')
 def call_api():

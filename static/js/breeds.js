@@ -22,6 +22,11 @@ function getDogBreeds(results) {
     let str_traits = ' ';
     for (let trait of traits) {
         str_traits += ('<li>' + trait + '</li>');
+
+        let t = trait.replace(/\s+/g, '-');
+
+        let toolStr = "#tooltip-" + t;
+        $(toolStr).show();
     }
 
     let str_dogs = ' ';
@@ -29,16 +34,25 @@ function getDogBreeds(results) {
     for (let dog of dogs) {
         str_dogs += '<li>' + dog[0] + '</li>';
         search_dogs.push(dog[0]);
-    }
-    let response = ('<h3>You said the following traits were most important to you:</h3>' +
-                    str_traits +
-                    '<h2>Dog breeds that match your preferences!</h2>' +
-                    str_dogs 
-                    );
 
+        let d = dog[0].replace(/\s+/g, '-');
+
+        let topStr = "#top-ten-" + d;
+        // $(topStr).show();
+        document.querySelector(topStr).style.display = "block";
+
+    }
+    let response = ('<h2>Traits and dog breeds that match your preference!</h2>');
+
+    $(".matches-container").show();
     $(".dog-quiz").toggle();
-    $("#retake-quiz").attr("hidden", false);
+    // $("#retake-quiz").attr("hidden", false);
     $("#dog-matches").html(response);
+
+    console.log(dogs[0][0]);
+    
+    // $("#breed-desc").html(dogs[0][0]);
+
 
     $.get('/call-api.json',
           { search_dogs: search_dogs }, 
@@ -63,16 +77,58 @@ function getDogTraits(evt) {
 
 $("#traits-form").on("submit", getDogTraits);
 
-function toggleQuiz(evt) {
-    evt.preventDefault();
+// function toggleQuiz(evt) {
+//     evt.preventDefault();
 
-    $("#dog-matches").html('');
-    $(".dog-quiz").toggle();
-    $("#retake-quiz").attr("hidden", true);
-}
+//     $("#dog-matches").html('');
+//     $(".dog-quiz").toggle();
+//     $("#retake-quiz").attr("hidden", true);
+// }
 
-$("#retake-quiz").on("click", toggleQuiz);
+// $("#retake-quiz").on("click", toggleQuiz);
 
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+});
+
+var current_fs, next_fs; //fieldsets
+var left, opacity, scale; //fieldset properties which we will animate
+var animating; //flag to prevent quick multi-click glitches
+
+$(".next").click(function(){
+    if(animating) return false;
+    animating = true;
+    
+    current_fs = $(this).parent();
+    next_fs = $(this).parent().next();
+    
+    //show the next fieldset
+    next_fs.show(); 
+    //hide the current fieldset with style
+    current_fs.animate({opacity: 0}, {
+        step: function(now, mx) {
+            //as the opacity of current_fs reduces to 0 - stored in "now"
+            //1. scale current_fs down to 80%
+            scale = 1 - (1 - now) * 0.2;
+            //2. bring next_fs from the right(50%)
+            left = (now * 50)+"%";
+            //3. increase opacity of next_fs to 1 as it moves in
+            opacity = 1 - now;
+            current_fs.css({
+        'transform': 'scale('+scale+')',
+        'position': 'absolute'
+      });
+            next_fs.css({'left': left, 'opacity': opacity});
+        }, 
+        duration: 800, 
+        complete: function(){
+            current_fs.hide();
+            animating = false;
+        }, 
+        //this comes from the custom easing plugin
+        easing: 'easeInOutBack'
+    });
+});
 
 
 
