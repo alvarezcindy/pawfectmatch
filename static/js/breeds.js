@@ -19,28 +19,21 @@ function getDogBreeds(results) {
     let traits = results[0];
     let dogs = results[1];
 
-    let str_traits = ' ';
     for (let trait of traits) {
-        str_traits += ('<li>' + trait + '</li>');
-
         let t = trait.replace(/\s+/g, '-');
-
         let toolStr = "#tooltip-" + t;
         $(toolStr).show();
     }
 
-    let str_dogs = ' ';
     let search_dogs = [];
+    let breeds = ' ';
+
     for (let dog of dogs) {
-        str_dogs += '<li>' + dog[0] + '</li>';
+        let clean_desc = dog[1];
+        clean_desc = clean_desc.replace(/"/g, "&quot;");
+        let desc = `data-desc="${clean_desc}"`;
+        breeds += ('<a href="#" class="btn btn-primary top-ten-button" value="'+dog[0]+'" '+ desc +'>' + dog[0] + '</a></br>');
         search_dogs.push(dog[0]);
-
-        let d = dog[0].replace(/\s+/g, '-');
-
-        let topStr = "#top-ten-" + d;
-        // $(topStr).show();
-        document.querySelector(topStr).style.display = "block";
-
     }
     let response = ('<h2>Traits and dog breeds that match your preference!</h2>');
 
@@ -48,11 +41,8 @@ function getDogBreeds(results) {
     $(".dog-quiz").toggle();
     // $("#retake-quiz").attr("hidden", false);
     $("#dog-matches").html(response);
-
-    console.log(dogs[0][0]);
-    
-    // $("#breed-desc").html(dogs[0][0]);
-
+    $("#top-ten-breeds").html(breeds);
+    $("#top-ten-desc").html(dogs[0][1]);
 
     $.get('/call-api.json',
           { search_dogs: search_dogs }, 
@@ -87,8 +77,17 @@ $("#traits-form").on("submit", getDogTraits);
 
 // $("#retake-quiz").on("click", toggleQuiz);
 
+function breedInfo(evt) {
+    evt.preventDefault();
+
+    let dog = $(this).attr("data-desc");
+    $("#top-ten-desc").html(dog);
+}
+
+$("#top-ten-breeds").on("click", "a", breedInfo);
+
 $(function () {
-  $('[data-toggle="tooltip"]').tooltip()
+  $('[data-toggle="tooltip"]').tooltip();
 });
 
 var current_fs, next_fs; //fieldsets
@@ -129,7 +128,5 @@ $(".next").click(function(){
         easing: 'easeInOutBack'
     });
 });
-
-
 
 

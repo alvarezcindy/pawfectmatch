@@ -78,22 +78,18 @@
         </div>
 
         <div class="matches-container"> 
-            <div id="dog-matches">
-            </div>
+
+            <div class="row" id="dog-matches"> </div>
             </br>
             </br>
 
             <div class="row" style="border:solid">
-                <div class="col-3 top-ten"> 
-                {% for breed in breeds %}
-                    <button id=top-ten-{{ breed[0]|replace(" ", "-") }} data-desc="desc-{{ breed[0]|replace(" ", "-") }}"> {{breed[0]}} </button>
-                {% endfor %}
+                <div class="col-3 top-ten" id="top-ten-breeds"> 
                 </div>
-                <div class="col-3 top-ten">
+                <div class="col-3 top-ten" id="top-ten-img">
                     <img src="/static/dog.jpg">
                 </div>
-                <div class="col-6" id="breed-desc" style="height:420px;width:550px;overflow:auto;">
-                    {{breeds[28][1]}}
+                <div class="col-6" id="top-ten-desc" style="height:420px;width:550px;overflow:auto;">
                 </div>  
             </div>
             </br>
