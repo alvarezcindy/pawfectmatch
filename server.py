@@ -107,6 +107,20 @@ def dog_traits():
 
     return jsonify(pos_traits, dogs)
 
+@app.route('/breeds')
+def breed_list():
+    breeds = (db.session.query(Breed.name, Breed.image, Breed.description)
+                        .order_by(Breed.name))
+    return render_template('breed_list.html', 
+                            breeds=breeds)
+
+@app.route('/traits')
+def trait_list():
+    traits = (db.session.query(Characteristic.name, Characteristic.description)
+                            .order_by(Characteristic.name))
+    return render_template('trait_list.html', 
+                            traits=traits)
+
 if __name__ == "__main__":
 
     #have to set debut=True to use debugger tool below

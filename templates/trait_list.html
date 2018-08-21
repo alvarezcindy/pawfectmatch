@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% for trait in traits %}
+
+<div class="accordion">
+  <div class="card">
+    <div class="card-header" id="h-{{ trait[0]|replace(" ", "-") }}">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#c-{{ trait[0]|replace(" ", "-") }}" aria-expanded="false" aria-controls="c-{{ trait[0]|replace(" ", "-") }}">
+          {{ trait[0] }}
+        </button>
+      </h5>
+    </div>
+
+    <div id="c-{{ trait[0]|replace(" ", "-") }}" class="collapse" aria-labelledby="h-{{ trait[0]|replace(" ", "-") }}">
+      <div class="card-body">
+        {{ trait[1] }}
+      </div>
+    </div>
+  </div>
+
+{% endfor %}
+
+{% endblock %}

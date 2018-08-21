@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% for breed in breeds %}
+
+<div class="accordion">
+  <div class="card">
+    <div class="card-header" id="h-{{ breed[0]|replace(" ", "-") }}">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#c-{{ breed[0]|replace(" ", "-") }}" aria-expanded="false" aria-controls="c-{{ breed[0]|replace(" ", "-") }}">
+          {{ breed[0] }}
+        </button>
+      </h5>
+    </div>
+
+    <div id="c-{{ breed[0]|replace(" ", "-") }}" class="collapse" aria-labelledby="h-{{ breed[0]|replace(" ", "-") }}">
+      <div class="card-body">
+        <img src="{{ breed[1] }}">
+        {{ breed[2] }}
+      </div>
+    </div>
+  </div>
+
+{% endfor %}
+
+{% endblock %}
