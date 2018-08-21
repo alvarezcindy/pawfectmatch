@@ -1,3 +1,9 @@
+.card-img-top {
+    width: 100%;
+    height: 25vw;
+    object-fit: cover;
+}
+
 .container-fluid {
     padding-left: 50px;
 }

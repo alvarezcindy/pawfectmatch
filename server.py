@@ -51,7 +51,7 @@ def call_api():
                     'breed': breed,
                     'location': '94702',
                     # 'offset': 16,
-                    'count': 10,
+                    'count': 20,
                     'format': 'json'
                     }
 
@@ -66,7 +66,8 @@ def call_api():
                 try:
                     dogs.append({'name': result['name']['$t'],
                                  'photos': result['media']['photos']['photo'][2]['$t'],
-                                 'desc': result['description']['$t'][:70]})
+                                 'desc': result['description']['$t'][:70],
+                                 'breed': result['breeds']['breed']['$t']})
                 except: 
                   continue
 

@@ -6,8 +6,8 @@ function updateDogCards(dogs) {
                      '<img class="card-img-top" src="' + dog['photos'] + 
                      '" alt="Card image cap"><div class="card-body">' +
                      '<h5 class="card-title">' + dog['name'] +
-                     '</h5><p class="card-text">' + dog['desc'] +
-                     '</p><a href="#" class="btn btn-primary">Read More!</a>' +
+                     '</h5><p class="card-text">' + dog['breed'] +
+                     '</p><a href="#" class="btn btn-primary">Favorite</a>' +
                      '</div></div></div>')
     }
 

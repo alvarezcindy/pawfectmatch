@@ -95,15 +95,15 @@
 </br>
 
 <div class="container-fluid">
-    <div class="row" id="dog-cards">
+    <div class="card-deck" id="dog-cards">
         {% for dog in dogs %}
         <div class="col-3">
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="{{dog['photos']}}" alt="Card image cap">
+            <div class="card">
+                <img class="card-img-top" src="{{dog['photos']}}/100px180" alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-title">{{dog['name']}}</h5>
-                    <p class="card-text">{{dog['desc']}}</p>
-                    <a href="#" class="btn btn-primary">Read More!</a>
+                    <p class="card-text">{{dog['breed']}}</p>
+                    <a href="#" class="btn btn-primary">Favorite</a>
                 </div>
             </div>
         </div>
