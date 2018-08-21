@@ -1,22 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <title>DogMatch</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="static/styles.css">
-</head>
-
-<body>
-<nav class="navbar navbar-dark bg-dark justify-content-between">
-  <a class="navbar-brand" style="color:white">DOGS!!!!</a>
-  <form class="form-inline">
-    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-  </form>
-</nav>
+{% extends 'base.html' %}
+{% block content %}
 
 <div class="container-fluid" style="height:600px">
     <div class ="row">
@@ -87,7 +70,7 @@
                 <div class="col-3 top-ten" id="top-ten-breeds"> 
                 </div>
                 <div class="col-3 top-ten">
-                    <img id="top-ten-img" src="/static/dog.jpg">
+                    <img id="top-ten-img">
                 </div>
                 <div class="col-6" id="top-ten-desc" style="height:420px;width:550px;overflow:auto;">
                 </div>  
@@ -130,11 +113,4 @@
     </div>
 </div>
 
-<script src="http://code.jquery.com/jquery.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="../static/js/breeds.js"></script>
-
-</body>
-</html>
+{% endblock %}

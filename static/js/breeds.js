@@ -43,18 +43,18 @@ function getDogBreeds(results) {
     let response = ('<h2>Traits and dog breeds that match your preference!</h2>');
 
     console.log(search_dogs);
+    $.get('/call-api.json',
+          { search_dogs: search_dogs }, 
+          updateDogCards);
+
     $(".matches-container").show();
     $(".dog-quiz").toggle();
     // $("#retake-quiz").attr("hidden", false);
     $("#dog-matches").html(response);
+
     $("#top-ten-breeds").html(breeds);
     $("#top-ten-desc").html(dogs[0][1]);
-
     $("#top-ten-img").attr("src", dogs[0][2]);
-
-    $.get('/call-api.json',
-          { search_dogs: search_dogs }, 
-          updateDogCards);
 }
 
 function getDogTraits(evt) {
