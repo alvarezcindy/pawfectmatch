@@ -23,8 +23,6 @@ app.jinja_env.undefined = StrictUndefined
 PETFINDER_KEY = os.environ.get('PETFINDER_KEY')
 PETFINDER_URL = 'http://api.petfinder.com/'
 
-breed_dict = {}
-
 @app.route('/')
 def index():
     """Homepage."""
@@ -105,21 +103,9 @@ def dog_traits():
         
     breed_list = [breed[0] for breed in breeds[0:10]]    
 
-    dogs = db.session.query(Breed.name, Breed.description).filter(Breed.name.in_(breed_list)).all()
-
-    for dog in dogs:
-        breed_dict[dog[0]] = dog[1]
-
-    print(breed_dict)
+    dogs = db.session.query(Breed.name, Breed.description, Breed.image).filter(Breed.name.in_(breed_list)).all()
 
     return jsonify(pos_traits, dogs)
-
-@app.route('/dog-info.json')
-def dog_info(breed):
-    breed_dict[breed] = breed_info
-    breed_info['image'] = image
-    breed_info['desc'] = desc
-    return jsonify(image, desc)
 
 if __name__ == "__main__":
 

@@ -8,11 +8,12 @@ import json
 
 def load_breeds():
     """Load dog breeds from json file into database"""
-    json_string = open("seed_data/breeds.json").read()
+    json_string = open("seed_data/breeds_neww.json").read()
     breeds_dict = json.loads(json_string)
 
     for dog in breeds_dict:
         name = dog['breed']
+        image = dog['image']
         desc = dog['info']
         clean_desc = ''
 
@@ -20,7 +21,8 @@ def load_breeds():
             clean_desc += each
 
         new_breed = Breed(name=name,
-                          description=clean_desc)
+                          description=clean_desc,
+                          image=image)
 
         # Add new dog breed to session
         db.session.add(new_breed)
@@ -30,7 +32,7 @@ def load_breeds():
 
 def load_ratings():
     """Load characteristic ratings from json file into database"""
-    json_string = open("seed_data/breeds.json").read()
+    json_string = open("seed_data/breeds_neww.json").read()
     breeds_dict = json.loads(json_string)
 
     for dog in breeds_dict:

@@ -30,19 +30,27 @@ function getDogBreeds(results) {
 
     for (let dog of dogs) {
         let clean_desc = dog[1];
+        let b = dog[0];
+
+        let pictures = `data-pic="${dog[2]}"`;
+
+
         clean_desc = clean_desc.replace(/"/g, "&quot;");
         let desc = `data-desc="${clean_desc}"`;
-        breeds += ('<a href="#" class="btn btn-primary top-ten-button" value="'+dog[0]+'" '+ desc +'>' + dog[0] + '</a></br>');
+        breeds += ('<a href="#" class="btn btn-primary top-ten-button" value="'+dog[0]+'" '+ desc +' '+ pictures +'>' + dog[0] + '</a></br>');
         search_dogs.push(dog[0]);
     }
     let response = ('<h2>Traits and dog breeds that match your preference!</h2>');
 
+    console.log(search_dogs);
     $(".matches-container").show();
     $(".dog-quiz").toggle();
     // $("#retake-quiz").attr("hidden", false);
     $("#dog-matches").html(response);
     $("#top-ten-breeds").html(breeds);
     $("#top-ten-desc").html(dogs[0][1]);
+
+    $("#top-ten-img").attr("src", dogs[0][2]);
 
     $.get('/call-api.json',
           { search_dogs: search_dogs }, 
@@ -81,7 +89,9 @@ function breedInfo(evt) {
     evt.preventDefault();
 
     let dog = $(this).attr("data-desc");
+    let pic = $(this).attr("data-pic");
     $("#top-ten-desc").html(dog);
+    $("#top-ten-img").attr("src", pic);
 }
 
 $("#top-ten-breeds").on("click", "a", breedInfo);

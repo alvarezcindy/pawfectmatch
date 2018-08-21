@@ -21,6 +21,7 @@ class BreedsSpider(scrapy.Spider):
     def parse(self, response): #takes the url response and extracts to dict
         yield {
             'breed': response.css('h1::text').extract_first(),
+            'image': response.css('.article-content img').xpath('@src').extract_first(),
             'char_scores': list(zip(response.css('span.characteristic::text')[0:-4].extract(), 
                 response.css('span.star::text').extract())),
             'intro': response.css('header p *::text').extract(),
