@@ -1,11 +1,23 @@
 /*custom font*/
 @import url(https://fonts.googleapis.com/css?family=Montserrat);
 
+body {
+  font-family: "Montserrat", sans-serif;
+  background: url(footprints.png);
+  background-size: 400px;
+}
+.bg-light {
+    background-color: #7f7f7f;
+}
+
 .row {
     justify-content: center;
 }
 
-.card-img-top {
+.col-3 {
+    padding-bottom: 25px;
+}
+.card-img-top{
     width: 100%;
     height: 25vw;
     object-fit: cover;
@@ -24,16 +36,29 @@
     display:none
 }
 
+.top-ten-button {
+    padding-bottom: 8px;
+    padding-left:0px;
+}
+
 .matches-container {
     display:none;
-    margin-top: 60px
+    margin-top: 100px
 }
+
+#middle-border {
+      background-color: blue;
+      height: 75%;
+      flex-grow: 1;
+      max-width: 2px;
+      z-index: 0;
+    }
 
 /*form styles*/
 #traits-form {
     text-align: center;
     position: relative;
-    margin-top: 50px;
+    margin-top: 100px;
 }
 
 #traits-form fieldset, .matches-container {
@@ -63,7 +88,7 @@
     font-weight: bold;
     color: white;
     border: 0 none;
-    border-radius: 25px;
+    border-radius: 10px;
     cursor: pointer;
     padding: 10px 5px;
     margin: 10px 5px;
@@ -75,7 +100,7 @@
     font-weight: bold;
     color: white;
     border: 0 none;
-    border-radius: 25px;
+    border-radius: 10px;
     cursor: pointer;
     padding: 10px 5px;
     margin: 10px 5px;

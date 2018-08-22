@@ -2,7 +2,7 @@
 function updateDogCards(dogs) {
     let response = ' ';
     for (let dog of dogs) {
-        response += ('<div class="col-3"><div class="card" style="width: 18rem;">' +
+        response += ('<div class="col-3"><div class="card">' +
                      '<img class="card-img-top" src="' + dog['photos'] + 
                      '" alt="Card image cap"><div class="card-body">' +
                      '<h5 class="card-title">' + dog['name'] +
