@@ -7,7 +7,7 @@ function updateDogCards(dogs) {
                      '" alt="Card image cap"><div class="card-body">' +
                      '<h5 class="card-title">' + dog['name'] +
                      '</h5><p class="card-text">' + dog['breed'] +
-                     '</p><a href="#" class="btn btn-primary">Favorite</a>' +
+                     '</p>' +
                      '</div></div></div>')
     }
 
@@ -40,7 +40,7 @@ function getDogBreeds(results) {
         breeds += ('<a href="#" class="btn btn-primary top-ten-button" value="'+dog[0]+'" '+ desc +' '+ pictures +'>' + dog[0] + '</a></br>');
         search_dogs.push(dog[0]);
     }
-    let response = ('<h2>Traits and dog breeds that match your preference!</h2>');
+    // let response = ('<h2>Traits and dog breeds that match your preference!</h2>');
 
     console.log(search_dogs);
     $.get('/call-api.json',
@@ -50,7 +50,7 @@ function getDogBreeds(results) {
     $(".matches-container").show();
     $(".dog-quiz").toggle();
     // $("#retake-quiz").attr("hidden", false);
-    $("#dog-matches").html(response);
+    // $("#dog-matches").html(response);
 
     $("#top-ten-breeds").html(breeds);
     $("#top-ten-desc").html(dogs[0][1]);
@@ -67,6 +67,7 @@ function getDogTraits(evt) {
         "pos_trait4": $("#pos_trait4").val(),
         "pos_trait5": $("#pos_trait5").val(),
     };
+    console.log(formInputs);
 
     $.post('/dog-list.json',
            formInputs,

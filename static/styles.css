@@ -16,30 +16,27 @@
     padding-right: 50px;
 }
 
-.dog-quiz {
-    margin-top: 50px;
-}
-
 .trait-tooltips button {
     display: none;
 }
 
 .top-ten button {
-    display:none;
+    display:none
 }
 
 .matches-container {
     display:none;
+    margin-top: 60px
 }
 
 /*form styles*/
 #traits-form {
     text-align: center;
     position: relative;
-    margin-top: 30px;
+    margin-top: 50px;
 }
 
-#traits-form fieldset {
+#traits-form fieldset, .matches-container {
     background: white;
     border: 0 none;
     border-radius: 0px;
@@ -56,7 +53,22 @@
     display: none;
 }
 
+.trait-tooltips {
+    text-align: center;
+}
+
 /*buttons*/
+.trait-tooltips button {
+    background: #ee0979;
+    font-weight: bold;
+    color: white;
+    border: 0 none;
+    border-radius: 25px;
+    cursor: pointer;
+    padding: 10px 5px;
+    margin: 10px 5px;
+}
+
 #traits-form .action-button {
     width: 100px;
     background: #ee0979;
@@ -73,22 +85,6 @@
     box-shadow: 0 0 0 2px white, 0 0 0 3px #ee0979;
 }
 
-#traits-form .action-button-previous {
-    width: 100px;
-    background: #C5C5F1;
-    font-weight: bold;
-    color: white;
-    border: 0 none;
-    border-radius: 25px;
-    cursor: pointer;
-    padding: 10px 5px;
-    margin: 10px 5px;
-}
-
-#traits-form .action-button-previous:hover, #traits-form .action-button-previous:focus {
-    box-shadow: 0 0 0 2px white, 0 0 0 3px #C5C5F1;
-}
-
 /*headings*/
 .fs-title {
     font-size: 18px;
@@ -97,6 +93,7 @@
     margin-bottom: 10px;
     letter-spacing: 2px;
     font-weight: bold;
+    text-align: center;
 }
 
 .fs-subtitle {
