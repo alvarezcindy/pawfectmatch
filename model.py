@@ -55,20 +55,6 @@ class Characteristic(db.Model):
         return f"<Characteristic char_id={self.char_id} name={self.name} description={self.description}>"
 
 
-class User(db.Model):
-    """User of ratings website."""
-
-    __tablename__ = "users"
-
-    user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    email = db.Column(db.String(64), nullable=True)
-    password = db.Column(db.String(64), nullable=True)
-
-    def __repr__(self):
-        """Provide helpful representation when printed."""
-
-        return f"<User user_id={self.user_id} email={self.email}>"
-
 ##############################################################################
 # Helper functions
 
