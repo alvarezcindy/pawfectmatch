@@ -1,4 +1,6 @@
 "use strict";
+
+// Update dog cards
 function updateDogCards(dogs) {
     let response = ' ';
     for (let dog of dogs) {
@@ -14,7 +16,7 @@ function updateDogCards(dogs) {
     $("#dog-cards").html(response);
 }
 
-
+// Display dog breeds and info in results div
 function getDogBreeds(results) {
     let traits = results[0];
     let dogs = results[1];
@@ -48,14 +50,12 @@ function getDogBreeds(results) {
 
     $(".matches-container").show();
     $(".dog-quiz").toggle();
-    // $("#retake-quiz").attr("hidden", false);
-    // $("#dog-matches").html(response);
-
     $("#top-ten-breeds").html(breeds);
     $("#top-ten-desc").html(dogs[0][1]);
     $("#top-ten-img").attr("src", dogs[0][2]);
 }
 
+// Get dog breeds from quiz results
 function getDogTraits(evt) {
     evt.preventDefault();
 
@@ -75,6 +75,26 @@ function getDogTraits(evt) {
 
 $("#traits-form").on("submit", getDogTraits);
 
+// $(".home-button").on("click", function (evt) {
+//     evt.preventDefault();
+//     $.post('dog-list.json', getDogBreeds);
+// });
+
+// Additional dog info on hover
+function showInfo(evt) {
+    $(this).find('#hidden-info').toggle();
+    $(this).find("#breed-info").toggle();
+}
+
+function hideInfo(evt) {
+    $(this).find("#breed-info").toggle();
+    $(this).find('#hidden-info').toggle();
+
+}
+
+$(".card").hover(showInfo, hideInfo);
+
+// Top ten breeds toggle
 function breedInfo(evt) {
     evt.preventDefault();
 
@@ -86,10 +106,13 @@ function breedInfo(evt) {
 
 $("#top-ten-breeds").on("click", "a", breedInfo);
 
+// Tooltip toggle
 $(function () {
   $('[data-toggle="tooltip"]').tooltip();
 });
 
+
+// Multi-step form control
 var current_fs, next_fs; //fieldsets
 var left, opacity, scale; //fieldset properties which we will animate
 var animating; //flag to prevent quick multi-click glitches

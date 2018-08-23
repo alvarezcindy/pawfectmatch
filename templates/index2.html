@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container-fluid">
+    <div class ="row">
+        <div class="matches-containerr"> 
+
+            <h2 class="fs-title"> Traits and dog breeds that match your preference! </h2>
+
+            <div class="row">
+                <div class="col-2 top-ten" id="top-ten-breeds">
+                {% for breed in breed_info %}
+                    <a href="#" class="btn btn-primary top-ten-button" value="{{breed[0]}}" data-desc="{{breed[1]}}" data-pic="{{breed[2]}}"> {{breed[0]}}</a></br>
+                {% endfor %}
+                </div>
+                <div class="col-4 top-ten">
+                    <img id="top-ten-img" src={{breed_info[0][2]}}>
+                </div>
+                <div class="col-6" id="top-ten-desc" style="height:410px;width:550px;overflow:auto;">
+                    {{breed_info[0][1]}}
+                </div>  
+            </div>
+
+            <div class="trait-tooltipss style="margin:auto">
+            {% for trait in traits %} 
+                <button id="tooltip-{{ trait[0]|replace(" ", "-") }}" type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="{{trait[1]}}">{{trait[0]}}</button>
+            {% endfor %}
+            </div>
+
+        </div>
+    </div>
+</div>
+</br>
+</br>
+</br>
+
+<div class="container-fluid">
+    <div class="row" id="dog-cards">
+    {% for dog in dogs %}
+        <div class="col-3">
+            <div class="card bg-dark text-white">
+              <img class="card-img" src="{{dog['photos']}}" alt="Card image">
+              <div class="card-img-overlay">
+                <h4 class="card-title text-center">{{dog['name'][0:20]}}</h4>
+                <p class="card-subtitle text-center" id="breed-info">{{dog['breed']}}</p>
+                <p class="card-subtitle text-center" id="hidden-info" style="display:none">
+                A BUNCH OF EXTRA STUFF
+                <button> FAVORITE ME </button>
+                </p>
+              </div>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

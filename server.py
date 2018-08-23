@@ -9,6 +9,7 @@ from flask import Flask, render_template, request, flash, redirect, session, jso
 from flask_debugtoolbar import DebugToolbarExtension
 from pprint import pprint, pformat
 from random import shuffle
+import json
 
 from model import connect_to_db, db, Breed, Rating, Characteristic
 
@@ -26,22 +27,38 @@ PETFINDER_URL = 'http://api.petfinder.com/'
 @app.route('/')
 def index():
     """Homepage."""
+    if 'quiz' not in session:
+        traits = db.session.query(Characteristic.name, Characteristic.description).all()
 
-    traits = db.session.query(Characteristic.name, Characteristic.description).all()
+        dogs = call_api()
 
-    dogs = call_api()
+        return render_template("index.html", 
+                               traits=traits,
+                               dogs=dogs)
 
-    return render_template("index.html", 
+    results = session['quiz']
+
+    traits = (db.session.query(Characteristic.name, Characteristic.description)
+                        .filter(Characteristic.name.in_(results))
+                        .order_by(Characteristic.name)
+                        )
+
+    breed_info, breeds = dog_traits()
+    dogs = call_api(breeds)
+    print(traits, dogs, breeds, breed_info)
+    return render_template("index2.html", 
                            traits=traits,
-                           dogs=dogs)
+                           dogs=dogs,
+                           breed_info=breed_info)
+
 
 @app.route('/call-api.json')
-def call_api():
+def call_api(breeds=None):
+    if breeds == None:
+        breeds = request.args.getlist("search_dogs[]")
 
-    breeds = request.args.getlist("search_dogs[]")
-
-    if not breeds:
-        breeds = [None]
+        if not breeds:
+            breeds = [None]
 
     dogs = []
 
@@ -80,13 +97,19 @@ def call_api():
 
 @app.route('/dog-list.json', methods=['POST'])
 def dog_traits():
-    pos_trait1 = request.form.get("pos_trait1")
-    pos_trait2 = request.form.get("pos_trait2")
-    pos_trait3 = request.form.get("pos_trait3")
-    pos_trait4 = request.form.get("pos_trait4")
-    pos_trait5 = request.form.get("pos_trait5")
 
-    pos_traits = (pos_trait1, pos_trait2, pos_trait3, pos_trait4, pos_trait5)
+    if 'quiz' not in session:
+        pos_trait1 = request.form.get("pos_trait1")
+        pos_trait2 = request.form.get("pos_trait2")
+        pos_trait3 = request.form.get("pos_trait3")
+        pos_trait4 = request.form.get("pos_trait4")
+        pos_trait5 = request.form.get("pos_trait5")
+
+        pos_traits = (pos_trait1, pos_trait2, pos_trait3, pos_trait4, pos_trait5)
+
+    else:
+        pos_traits = session.get('quiz')
+        pos_trait1, pos_trait2, pos_trait3, pos_trait4, pos_trait5 = session.get('quiz')
 
     breeds = (db.session.query(Breed.name, func.count(Breed.breed_id))
                       .join(Rating)
@@ -106,7 +129,10 @@ def dog_traits():
 
     dogs = db.session.query(Breed.name, Breed.description, Breed.image).filter(Breed.name.in_(breed_list)).all()
 
-    return jsonify(pos_traits, dogs)
+    if 'quiz' not in session:
+        session['quiz'] = pos_traits
+        return jsonify(pos_traits, dogs)
+    return (dogs, breed_list)
 
 @app.route('/breeds')
 def breed_list():

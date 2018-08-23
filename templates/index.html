@@ -39,8 +39,8 @@
                         I want my dog to tolerate hot weather.</br></label></br>
                         <label><input type="radio" name="trait3" value="Tolerates Cold Weather"> 
                         I want my dog to tolerate cold weather.</br></label></br>
-                        <label><input type="radio" name="trait3" value="Adapts Well to Apartment Living"></label> 
-                        I want my dog adapt well to apartment living.
+                        <label><input type="radio" name="trait3" value="Adapts Well to Apartment Living"> 
+                        I want my dog adapt well to apartment living.</label>
                     </div>
                     <input type="button" name="next" class="next action-button" value="Next"/>
                 </fieldset>
@@ -84,6 +84,7 @@
                 </div>
                 <div class="col-6" id="top-ten-desc" style="height:410px;width:550px;overflow:auto;"></div>  
             </div>
+
             <div class="trait-tooltips" style="margin:auto">
             {% for trait in traits %} 
 
@@ -91,7 +92,9 @@
 
             {% endfor %}
             </div>
+            
         </div>
+
     </div>
 </div>
 </br>
@@ -106,7 +109,11 @@
               <img class="card-img" src="{{dog['photos']}}" alt="Card image">
               <div class="card-img-overlay">
                 <h4 class="card-title text-center">{{dog['name'][0:20]}}</h4>
-                <p class="card-subtitle text-center">{{dog['breed']}}</p>
+                <p class="card-subtitle text-center" id="breed-info">{{dog['breed']}}</p>
+                <p class="card-subtitle text-center" id="hidden-info" style="display:none">
+                A BUNCH OF EXTRA STUFF
+                <button> FAVORITE ME </button>
+                </p>
               </div>
             </div>
         </div>
