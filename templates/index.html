@@ -9,11 +9,11 @@
                     <h2 class="fs-title">Friendliness</h2>
                     <h3 class="fs-subtitle">Friendliness towards other dogs, humans and kids are very different things! Which of the following is most important for you?</h3>
                     <div class="radio">
-                        <label><input type="radio" name="optradio" id="pos_trait1" value="Friendly Toward Strangers">
+                        <label><input type="radio" name="trait1" value="Friendly Toward Strangers">
                         I want my dog to be friendly towards strangers.</label></br>
-                        <label><input type="radio" name="optradio" id="pos_trait1" value="Dog Friendly"> 
+                        <label><input type="radio" name="trait1" value="Dog Friendly"> 
                         I want my dog to be friendly towards other dogs.</label></br>
-                        <label><input type="radio" name="optradio" id="pos_trait1" value="Incredibly Kid Friendly Dogs"> 
+                        <label><input type="radio" name="trait1" value="Incredibly Kid Friendly Dogs"> 
                         I want my dog to be very kid friendly.</label>
                     </div>
                     <input type="button" name="next" class="next action-button" value="Next"/>
@@ -22,11 +22,11 @@
                     <h2 class="fs-title">Energy Level</h2>
                     <h3 class="fs-subtitle">Breeds that were originally bred for physically demanding jobs tend to have high-energy levels. </br>Some dogs require a lot of exercise while others are the equivalent of a 'couch potato'. Which of the following best fits your lifestyle?</h3>
                     <div class="radio">
-                        <label><input type="radio" name="optradio" id="pos_trait2" value="Energy Level">
+                        <label><input type="radio" name="trait2" value="Energy Level">
                         I want my dog to have a lot of energy.</label></br>
-                        <label><input type="radio" name="optradio" id="pos_trait2" value="Potential for Playfulness"> 
+                        <label><input type="radio" name="trait2" value="Potential For Playfulness"> 
                         I want my dog to be very playful.</label></br>
-                        <label><input type="radio" name="optradio" id="pos_trait2" value="Tolerates Being Alone"> 
+                        <label><input type="radio" name="trait2" value="Tolerates Being Alone"> 
                         I want my dog to tolerate being alone.</label>
                     </div>
                     <input type="button" name="next" class="next action-button" value="Next"/>
@@ -35,11 +35,11 @@
                     <h2 class="fs-title">Lifestyle & Environment</h2>
                     <h3 class="fs-subtitle"> Dogs with short coats and little body fat are vulnerable to the cold. Breeds with short noses cannot pant as well to cool-off. </br>Or if you won't spend too much time outside, perhaps you are looking for the qualities that make a good apartment dog. Which of the following best fits your needs? </h3>
                     <div class="radio">
-                        <label><input type="radio" name="optradio" id="pos_trait3" value="Tolerates Hot Weather">
+                        <label><input type="radio" name="trait3" value="Tolerates Hot Weather">
                         I want my dog to tolerate hot weather.</br></label></br>
-                        <label><input type="radio" name="optradio" id="pos_trait3" value="Tolerates Cold Weather"> 
+                        <label><input type="radio" name="trait3" value="Tolerates Cold Weather"> 
                         I want my dog to tolerate cold weather.</br></label></br>
-                        <label><input type="radio" name="optradio" id="pos_trait3" value="Adapts Well to Apartment Living"></label> 
+                        <label><input type="radio" name="trait3" value="Adapts Well to Apartment Living"></label> 
                         I want my dog adapt well to apartment living.
                     </div>
                     <input type="button" name="next" class="next action-button" value="Next"/>
@@ -48,12 +48,12 @@
                     <h2 class="fs-title">Lifestyle & Environment</h2>
                     <h3 class="fs-subtitle"> Dogs with short coats and little body fat are vulnerable to the cold. Breeds with short noses cannot pant as well to cool-off. </br>Or if you won't spend too much time outside, perhaps you are looking for the qualities that make a good apartment dog. Which of the following best fits your needs? </h3>
                     <div class="radio">
-                        <label><input type="radio" name="optradio" id="pos_trait4" value="Tolerates Hot Weather" checked>
-                        I want my dog to tolerate hot weather.</label></br>
-                        <label><input type="radio" name="optradio" id="pos_trait4" value="Tolerates Cold Weather"> 
-                        I want my dog to tolerate cold weather.</label></br>
-                        <label><input type="radio" name="optradio" id="pos_trait4" value="Adapts Well to Apartment Living"> 
-                        I want my dog adapt well to apartment living.</label>
+                        <label><input type="radio" name="trait4" value="Easy To Train">
+                        I want my dog to be easy to train.</label></br>
+                        <label><input type="radio" name="trait4" value="Easy To Groom"> 
+                        I want my dog to be easy to groom.</label></br>
+                        <label><input type="radio" name="trait4" value="Good For Novice Owners"> 
+                        I want my dog good for novice owners</label>
                     </div>
                     <input type="button" name="next" class="next action-button" value="Next"/>
                 </fieldset>
@@ -61,12 +61,12 @@
                     <h2 class="fs-title">Friendliness</h2>
                     <h3 class="fs-subtitle">Friendliness towards other dogs, humans and kids are very different things! Which of the following is most important for you?</h3>
                     <div class="radio">
-                        <label><input type="radio" name="optradio" id="pos_trait5" value="Friendly Toward Strangers">
-                        I want my dog to be friendly towards strangers.</label></br>
-                        <label><input type="radio" name="optradio" id="pos_trait5" value="Dog Friendly"> 
-                        I want my dog to be friendly towards other dogs.</label></br>
-                        <label><input type="radio" name="optradio" id="pos_trait5" value="Incredibly Kid Friendly Dogs"> 
-                        I want my dog to be very kid friendly.</label>
+                        <label><input type="radio" name="trait5" value="Affectionate with Family">
+                        I want my dog to be affectionate with family.</label></br>
+                        <label><input type="radio" name="trait5" value="Intelligence"> 
+                        I want my dog to be intelligent.</label></br>
+                        <label><input type="radio" name="trait5" value="Wanderlust Potential"> 
+                        I want my dog to have a big wanderlust potential.</label>
                     </div>
                     <input type="submit" name="submit" class="submit action-button" value="Submit"/>
                 </fieldset>
@@ -99,18 +99,18 @@
 </br>
 
 <div class="container-fluid">
-    <div class="card-deck" id="dog-cards">
-        {% for dog in dogs %}
+    <div class="row" id="dog-cards">
+    {% for dog in dogs %}
         <div class="col-3">
-            <div class="card">
-                <img class="card-img-top" src="{{dog['photos']}}" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">{{dog['name']}}</h5>
-                    <p class="card-text">{{dog['breed']}}</p>
-                </div>
+            <div class="card bg-dark text-white">
+              <img class="card-img" src="{{dog['photos']}}" alt="Card image">
+              <div class="card-img-overlay">
+                <h4 class="card-title text-center">{{dog['name'][0:20]}}</h4>
+                <p class="card-subtitle text-center">{{dog['breed']}}</p>
+              </div>
             </div>
         </div>
-        {% endfor %}
+    {% endfor %}
     </div>
 </div>
 

@@ -2,13 +2,13 @@
 function updateDogCards(dogs) {
     let response = ' ';
     for (let dog of dogs) {
-        response += ('<div class="col-3"><div class="card">' +
-                     '<img class="card-img-top" src="' + dog['photos'] + 
-                     '" alt="Card image cap"><div class="card-body">' +
-                     '<h5 class="card-title">' + dog['name'] +
-                     '</h5><p class="card-text">' + dog['breed'] +
-                     '</p>' +
-                     '</div></div></div>')
+        response += ('<div class="col-3">' +
+                    '<div class="card bg-dark text-white">' +
+                    '<img class="card-img" src="' + dog['photos'] +'" alt="Card image">' +
+                    '<div class="card-img-overlay">' +
+                    '<h4 class="card-title text-center">' + dog['name'].slice(0,20) +'</h4>' +
+                    '<p class="card-subtitle text-center">' + dog['breed'] +'</p>' +
+                    '</div></div></div>')
     }
 
     $("#dog-cards").html(response);
@@ -40,7 +40,6 @@ function getDogBreeds(results) {
         breeds += ('<a href="#" class="btn btn-primary top-ten-button" value="'+dog[0]+'" '+ desc +' '+ pictures +'>' + dog[0] + '</a></br>');
         search_dogs.push(dog[0]);
     }
-    // let response = ('<h2>Traits and dog breeds that match your preference!</h2>');
 
     console.log(search_dogs);
     $.get('/call-api.json',
@@ -61,11 +60,11 @@ function getDogTraits(evt) {
     evt.preventDefault();
 
     const formInputs = {
-        "pos_trait1": $("#pos_trait1").val(),
-        "pos_trait2": $("#pos_trait2").val(),
-        "pos_trait3": $("#pos_trait3").val(),
-        "pos_trait4": $("#pos_trait4").val(),
-        "pos_trait5": $("#pos_trait5").val(),
+        "pos_trait1": $("input[name='trait1']:checked").val(),
+        "pos_trait2": $("input[name='trait2']:checked").val(),
+        "pos_trait3": $("input[name='trait3']:checked").val(),
+        "pos_trait4": $("input[name='trait4']:checked").val(),
+        "pos_trait5": $("input[name='trait5']:checked").val(),
     };
     console.log(formInputs);
 
@@ -75,16 +74,6 @@ function getDogTraits(evt) {
 }
 
 $("#traits-form").on("submit", getDogTraits);
-
-// function toggleQuiz(evt) {
-//     evt.preventDefault();
-
-//     $("#dog-matches").html('');
-//     $(".dog-quiz").toggle();
-//     $("#retake-quiz").attr("hidden", true);
-// }
-
-// $("#retake-quiz").on("click", toggleQuiz);
 
 function breedInfo(evt) {
     evt.preventDefault();
