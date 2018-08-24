@@ -58,8 +58,8 @@
                     <input type="button" name="next" class="next action-button" value="Next"/>
                 </fieldset>
                 <fieldset>
-                    <h2 class="fs-title">Friendliness</h2>
-                    <h3 class="fs-subtitle">Friendliness towards other dogs, humans and kids are very different things! Which of the following is most important for you?</h3>
+                    <h2 class="fs-title">Relationship with Family</h2>
+                    <h3 class="fs-subtitle">Perhaps you want your dog to be attentive and affectionate with the family. Or maybe you find a dog that wanders and daydreams adorable! </br>Which of the following best fits what you are looking for? </h3>
                     <div class="radio">
                         <label><input type="radio" name="trait5" value="Affectionate with Family">
                         I want my dog to be affectionate with family.</label></br>
@@ -111,8 +111,18 @@
                 <h4 class="card-title text-center">{{dog['name'][0:20]}}</h4>
                 <p class="card-subtitle text-center" id="breed-info">{{dog['breed']}}</p>
                 <p class="card-subtitle text-center" id="hidden-info" style="display:none">
-                A BUNCH OF EXTRA STUFF
-                <button> FAVORITE ME </button>
+                {% if dog['sex'] == 'M' %}
+                    {% set sex = 'Male' %}
+                {% else %}
+                    {% set sex = 'Female' %}
+                {% endif %}
+
+                {{dog['breed']}} </br>
+                {{sex}} </br></br>
+                Contact Info: </br>
+                {{dog['email']}}</br>
+                {{dog['phone']}}</br>
+                {{dog['city']}}, {{dog['zipcode']}}
                 </p>
               </div>
             </div>

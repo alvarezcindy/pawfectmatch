@@ -44,8 +44,18 @@
                 <h4 class="card-title text-center">{{dog['name'][0:20]}}</h4>
                 <p class="card-subtitle text-center" id="breed-info">{{dog['breed']}}</p>
                 <p class="card-subtitle text-center" id="hidden-info" style="display:none">
-                A BUNCH OF EXTRA STUFF
-                <button> FAVORITE ME </button>
+                {% if dog['sex'] == 'M' %}
+                    {% set sex = 'Male' %}
+                {% else %}
+                    {% set sex = 'Female' %}
+                {% endif %}
+
+                {{dog['breed']}} </br>
+                {{sex}} </br></br>
+                Contact Info: </br>
+                {{dog['email']}}</br>
+                {{dog['phone']}}</br>
+                {{dog['city']}}, {{dog['zipcode']}}
                 </p>
               </div>
             </div>

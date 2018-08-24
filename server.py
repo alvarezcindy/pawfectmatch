@@ -68,7 +68,7 @@ def call_api(breeds=None):
                     'breed': breed,
                     'location': '94702',
                     # 'offset': 16,
-                    'count': 20,
+                    'count': 12,
                     'format': 'json'
                     }
 
@@ -81,12 +81,37 @@ def call_api(breeds=None):
 
             for result in results: 
                 try:
-                    dogs.append({'name': result['name']['$t'],
-                                 'photos': result['media']['photos']['photo'][2]['$t'],
-                                 'desc': result['description']['$t'][:70],
-                                 'breed': result['breeds']['breed']['$t']})
+                  photos = result['media']['photos']['photo'][2]['$t']
                 except: 
                   continue
+
+                try:
+                  breed1 = result['breeds']['breed'][0].get('$t', ' ')
+                  # breed2 = result['breeds']['breed'][1].get('$t', ' ')
+                  # breed = breed1 + ' & ' + breed2
+                except:
+                  breed = result['breeds']['breed'].get('$t', ' ')
+
+                name = result['name'].get('$t', ' ')
+                sex = result['sex'].get('$t', ' ')
+                email = result['contact']['email'].get('$t', ' ')
+                phone = result['contact']['phone'].get('$t', ' ')
+                city = result['contact']['city'].get('$t', ' ')
+                zipcode = result['contact']['zip'].get('$t', ' ')
+
+                dogs.append({'name': name,
+                             'photos': photos,
+                             'breed': breed,
+                             'sex': sex,
+                             'email': email,
+                             'phone': phone,
+                             'city': city,
+                             'zipcode': zipcode})
+
+                # dogs.append({'name': result['name']['$t'],
+                #             'photos': result['media']['photos']['photo'][2]['$t'],
+                #             'desc': result['description']['$t'][:70],
+                #             'breed': result['breeds']['breed']['$t']})
 
     shuffle(dogs)
 

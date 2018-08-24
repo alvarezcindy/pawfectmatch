@@ -7,10 +7,38 @@ body {
   background-size: 400px;
 }
 
+/*accordion search bar*/
+#accordion_search_bar {
+    display: block;
+    margin: 10px auto;
+    width: 100%;
+    padding: 7px 10px;
+    border: 1px solid gray;
+    border-radius: 25px;
+    outline: 0;
+  }
+
+.btn-link {
+    color: #ee0979;
+}
+
+/*breed-list route*/
+#breed-container, #traits-container {
+    padding-left: 200px;
+    padding-right: 200px;
+    padding-top: 100px;
+}
+
+.accordion-img {
+    float: left;
+}
+
+/*login and favorites icon*/
 .fa-user, .fa-heart-o {
     padding-left: 20px;
     color: #ee0979;
 }
+
 .navbar {
     padding-left: 80px;
     padding-right:80px;
@@ -47,6 +75,7 @@ body {
     margin-bottom: 0; 
 }
 
+/*homepage padding*/
 .container-fluid {
     padding-left: 50px;
     padding-right: 50px;

@@ -9,7 +9,9 @@ function updateDogCards(dogs) {
                     '<img class="card-img" src="' + dog['photos'] +'" alt="Card image">' +
                     '<div class="card-img-overlay">' +
                     '<h4 class="card-title text-center">' + dog['name'].slice(0,20) +'</h4>' +
-                    '<p class="card-subtitle text-center">' + dog['breed'] +'</p>' +
+                    '<p class="card-subtitle text-center id="breed-info">' + dog['breed'] +'</p>' +
+                    '<p class="card-subtitle text-center" id="hidden-info" style="display:none">' +
+                    'A BUNCH OF EXTRA STUFF' + '<button> FAVORITE ME </button></p>' +
                     '</div></div></div>')
     }
 
@@ -94,6 +96,10 @@ function hideInfo(evt) {
 
 $(".card").hover(showInfo, hideInfo);
 
+
+// $(".card").on("mouseleave", "#dog-cards", showInfo);
+// $(".card").on("mouseenter", ".dog-cards", hideInfo);
+
 // Top ten breeds toggle
 function breedInfo(evt) {
     evt.preventDefault();
@@ -151,4 +157,6 @@ $(".next").click(function(){
         easing: 'easeInOutBack'
     });
 });
+
+
 
