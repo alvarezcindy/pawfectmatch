@@ -96,9 +96,11 @@ function hideInfo(evt) {
 
 $(".card").hover(showInfo, hideInfo);
 
+// $(".card").on("hover", showInfo, hideInfo);
 
-// $(".card").on("mouseleave", "#dog-cards", showInfo);
-// $(".card").on("mouseenter", ".dog-cards", hideInfo);
+
+// $(".card").on("mouseleave", "div", hideInfo);
+// $(".card").on("mouseenter", "div", showInfo);
 
 // Top ten breeds toggle
 function breedInfo(evt) {
