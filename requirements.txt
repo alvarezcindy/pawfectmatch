@@ -20,7 +20,6 @@ Jinja2==2.10
 lxml==4.2.3
 MarkupSafe==1.0
 parsel==1.5.0
-pkg-resources==0.0.0
 psycopg2==2.7.5
 pyasn1==0.4.3
 pyasn1-modules==0.2.2

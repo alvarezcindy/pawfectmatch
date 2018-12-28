@@ -8,7 +8,7 @@ A full stack web application that allows users to take a quiz and match with ado
 * [Installation](#install)
 * [About Me](#aboutme)
 
-## ## <a name="technologies"></a> Tech Stack
+## <a name="technologies"></a> Tech Stack
 
 __Frontend:__ Javascript, jQuery, Ajax, Jinja2, Bootstrap, HTML, CSS </br>
 __Backend:__ Python, Flask </br>
