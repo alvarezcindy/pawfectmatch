@@ -1,5 +1,17 @@
 "use strict";
 
+
+// SMS Modal
+// $('#myModal').on('shown.bs.modal', function () {
+//   $('#myInput').trigger('focus')
+// })
+
+// $(function () {
+//         $("#myModal").appendTo("body");
+//     });
+
+
+
 // Update dog cards
 function updateDogCards(dogs) {
     let response = ' ';
@@ -99,13 +111,9 @@ $("#dog-cards").on("mouseleave", ".card", hideInfo);
 // Twilio SMS Feature
 
 function sendSMS(evt) {
-    debugger;
-    // $.get('/call-api.json',
-    //       { search_dogs: search_dogs }, 
-    //       updateDogCards);
 }
 
-$(".sms-button").on("click", sendSMS);
+$(".send-sms").on("click", sendSMS);
 
 // Top ten breeds toggle
 function breedInfo(evt) {

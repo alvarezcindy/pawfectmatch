@@ -33,12 +33,12 @@ TWILIO_NUM_TO = os.environ.get('TWILIO_NUM_TO')
 
 client = Client(TWILIO_SID, TWILIO_TOKEN)
 
-message = client.messages.create(
-                     body="Join Earth's mightiest heroes. Like Kevin Bacon.",
-                     from_=TWILIO_NUM_FROM,
-                     to=TWILIO_NUM_TO)  
+# message = client.messages.create(
+#                      body="Join Earth's mightiest heroes. Like Kevin Bacon.",
+#                      from_=TWILIO_NUM_FROM,
+#                      to=TWILIO_NUM_TO)  
 
-print(message.sid)
+# print(message.sid)
 
 @app.route('/')
 def index():
@@ -189,7 +189,9 @@ def trait_list():
     return render_template('trait_list.html', 
                             traits=traits)
 
-# @app.route(/)
+# @app.route(/sms)
+# def send_sms():
+#   return
 
 if __name__ == "__main__":
 
