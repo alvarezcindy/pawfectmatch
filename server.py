@@ -11,6 +11,8 @@ from pprint import pprint, pformat
 from random import shuffle
 import json
 
+from twilio.rest import Client
+
 from model import connect_to_db, db, Breed, Rating, Characteristic
 
 #initialize Flask app
@@ -23,6 +25,20 @@ app.jinja_env.undefined = StrictUndefined
 
 PETFINDER_KEY = os.environ.get('PETFINDER_KEY')
 PETFINDER_URL = 'http://api.petfinder.com/'
+
+TWILIO_SID = os.environ.get('TWILIO_SID')
+TWILIO_TOKEN = os.environ.get('TWILIO_TOKEN')
+TWILIO_NUM_FROM = os.environ.get('TWILIO_NUM_FROM')
+TWILIO_NUM_TO = os.environ.get('TWILIO_NUM_TO')
+
+client = Client(TWILIO_SID, TWILIO_TOKEN)
+
+message = client.messages.create(
+                     body="Join Earth's mightiest heroes. Like Kevin Bacon.",
+                     from_=TWILIO_NUM_FROM,
+                     to=TWILIO_NUM_TO)  
+
+print(message.sid)
 
 @app.route('/')
 def index():
@@ -172,6 +188,8 @@ def trait_list():
                             .order_by(Characteristic.name))
     return render_template('trait_list.html', 
                             traits=traits)
+
+# @app.route(/)
 
 if __name__ == "__main__":
 

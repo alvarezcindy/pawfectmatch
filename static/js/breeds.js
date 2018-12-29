@@ -11,7 +11,7 @@ function updateDogCards(dogs) {
                     '<h4 class="card-title text-center">' + dog['name'].slice(0,20) +'</h4>' +
                     '<p class="card-subtitle text-center id="breed-info">' + dog['breed'] +'</p>' +
                     '<p class="card-subtitle text-center" id="hidden-info" style="display:none">' +
-                    'A BUNCH OF EXTRA STUFF' + '<button> FAVORITE ME </button></p>' +
+                    'A BUNCH OF EXTRA STUFF' + '<button> TESTING SMS </button></p>' +
                     '</div></div></div>')
     }
 
@@ -95,6 +95,17 @@ function hideInfo(evt) {
 
 $("#dog-cards").on("mouseenter", ".card", showInfo);
 $("#dog-cards").on("mouseleave", ".card", hideInfo);
+
+// Twilio SMS Feature
+
+function sendSMS(evt) {
+    debugger;
+    // $.get('/call-api.json',
+    //       { search_dogs: search_dogs }, 
+    //       updateDogCards);
+}
+
+$(".sms-button").on("click", sendSMS);
 
 // Top ten breeds toggle
 function breedInfo(evt) {
