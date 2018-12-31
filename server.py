@@ -12,6 +12,7 @@ from random import shuffle
 import json
 
 from twilio.rest import Client
+from twilio.twiml.messaging_response import MessagingResponse
 
 from model import connect_to_db, db, Breed, Rating, Characteristic
 
@@ -32,13 +33,6 @@ TWILIO_NUM_FROM = os.environ.get('TWILIO_NUM_FROM')
 TWILIO_NUM_TO = os.environ.get('TWILIO_NUM_TO')
 
 client = Client(TWILIO_SID, TWILIO_TOKEN)
-
-# message = client.messages.create(
-#                      body="Join Earth's mightiest heroes. Like Kevin Bacon.",
-#                      from_=TWILIO_NUM_FROM,
-#                      to=TWILIO_NUM_TO)  
-
-# print(message.sid)
 
 @app.route('/')
 def index():
@@ -189,9 +183,41 @@ def trait_list():
     return render_template('trait_list.html', 
                             traits=traits)
 
-# @app.route(/sms)
-# def send_sms():
-#   return
+@app.route('/send-sms', methods=['POST'])
+def send_sms():
+  to_num = request.form.get("to_num")
+  text = request.form.get("text")
+  photo = request.form.get("photo")
+  breed = request.form.get("breed")
+  contact = request.form.get("contact")
+  name = request.form.get("name")
+
+  message = client.messages.create(
+                     body=text,
+                     media_url=photo,
+                     from_=TWILIO_NUM_FROM,
+                     to=TWILIO_NUM_TO) 
+
+  instructions = "If you'd like to learn more about " + str(name) + ". Respond with 'info' for details"
+  client.messages.create(
+                     body=instructions,
+                     from_=TWILIO_NUM_FROM,
+                     to=TWILIO_NUM_TO) 
+  
+@app.route("/sms", methods=['GET', 'POST'])
+def reply_sms():
+
+    resp = MessagingResponse()
+
+    body = request.values.get('Body', None)
+
+    if body == 'contact':
+      resp.message("Email: pawparent@gmail.com ; Phone:(510) 555-1212")
+    else:
+      resp.message("Sorry! that was an invalid message. Please reply with 'contact' if you'd like additional information")
+
+    return str(resp)
+  
 
 if __name__ == "__main__":
 
